@@ -1,12 +1,14 @@
 package oncall
 
 object Util {
+    const val ERROR_MESSAGE = "[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요."
+
     fun <T> retryUntilValid(action: () -> T): T {
         while (true) {
             try {
                 return action()
             } catch (e: IllegalArgumentException) {
-                println("[ERROR] 유효하지 않은 입력 값입니다. 다시 입력해 주세요.")
+                println(e.message)
             }
         }
     }

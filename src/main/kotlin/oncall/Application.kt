@@ -1,5 +1,9 @@
 package oncall
 
+import oncall.model.DayOfWeek
+
 fun main() {
-    TODO("프로그램 구현")
+    val list = DayOfWeek.getListOfDaysSize(8, DayOfWeek.WEDNESDAY)
+
+    println(list)
 }
