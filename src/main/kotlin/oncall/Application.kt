@@ -1,11 +1,14 @@
 package oncall
 
-import oncall.model.DayOfWeek
+import oncall.controller.Controller
 import oncall.service.Service
+import oncall.view.InputView
+import oncall.view.OutputView
 
 fun main() {
-    val list = DayOfWeek.getListOfDaysSize(8, DayOfWeek.WEDNESDAY)
+    val inputView = InputView()
+    val outputView = OutputView()
     val service = Service()
-
-    println(service.getListOfDay(5, DayOfWeek.MONDAY))
+    val controller = Controller(inputView, outputView, service)
+    controller.run()
 }

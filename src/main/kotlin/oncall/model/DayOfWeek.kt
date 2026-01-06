@@ -2,7 +2,7 @@ package oncall.model
 
 import oncall.Util
 
-enum class DayOfWeek(name: String, isWeekDay: Boolean) {
+enum class DayOfWeek(val label: String, val isWeekDay: Boolean) {
     MONDAY("월", true),
     TUESDAY("화", true),
     WEDNESDAY("수", true),
@@ -14,7 +14,7 @@ enum class DayOfWeek(name: String, isWeekDay: Boolean) {
     companion object {
         fun findByName(input: String): DayOfWeek {
             return entries.find {
-                it.name == input
+                it.label == input
             } ?: throw IllegalArgumentException(Util.ERROR_MESSAGE)
         }
 
