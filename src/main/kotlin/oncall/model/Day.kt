@@ -1,7 +1,5 @@
 package oncall.model
 
-import oncall.Util
-
 data class Day(
     val month: Int,
     val day: Int,
@@ -11,6 +9,10 @@ data class Day(
 ) {
     init {
         isLegalHoliday = LegalHoliday.isLegalHoliday(month, day)
+    }
+
+    fun isHoliday(): Boolean {
+        return !(dayOfWeek.isWeekDay && !isLegalHoliday)
     }
 
     private enum class LegalHoliday(val month: Int, val day: Int) {

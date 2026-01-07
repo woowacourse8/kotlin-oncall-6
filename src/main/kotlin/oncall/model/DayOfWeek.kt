@@ -27,12 +27,12 @@ enum class DayOfWeek(val label: String, val isWeekDay: Boolean) {
             var checkCount = 0
             val dayOfWeekList = mutableListOf<DayOfWeek>()
 
-            while (checkCount < totalDays) {
-                for (dayOfWeek in remainingDayOfWeeks) {
-                    dayOfWeekList.add(dayOfWeek)
-                    checkCount++
-                }
+            for (dayOfWeek in remainingDayOfWeeks) {
+                dayOfWeekList.add(dayOfWeek)
+                checkCount++
+            }
 
+            while (checkCount < totalDays) {
                 for (dayOfWeek in DayOfWeek.entries) {
                     dayOfWeekList.add(dayOfWeek)
                     checkCount++

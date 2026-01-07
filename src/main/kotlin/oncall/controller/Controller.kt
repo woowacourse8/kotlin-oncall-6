@@ -2,8 +2,8 @@ package oncall.controller
 
 import oncall.Util
 import oncall.service.Service
-import oncall.view.*
-import kotlin.system.exitProcess
+import oncall.view.InputView
+import oncall.view.OutputView
 
 class Controller(
     private val inputView: InputView,
@@ -25,8 +25,9 @@ class Controller(
         }
 
         val schedule = service.putWorkerNameInDayList(dayList, weekdayWorkers, holidayWorkers)
+        val newSchedule = service.checkSchedule(schedule)
 
         // 근무표 출력하기
-        outputView.printSchedule(schedule)
+        outputView.printSchedule(newSchedule)
     }
 }
