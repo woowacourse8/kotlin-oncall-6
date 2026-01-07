@@ -24,10 +24,10 @@ class Controller(
             Pair(weekdayWorkers, holidayWorkers)
         }
 
-        val schedule = service.putWorkerNameInDayList(dayList, weekdayWorkers, holidayWorkers)
-        val newSchedule = service.checkSchedule(schedule)
+        // 스케줄 생성
+        val schedule = service.createSchedule(dayList, weekdayWorkers, holidayWorkers)
 
         // 근무표 출력하기
-        outputView.printSchedule(newSchedule)
+        outputView.printSchedule(schedule)
     }
 }
