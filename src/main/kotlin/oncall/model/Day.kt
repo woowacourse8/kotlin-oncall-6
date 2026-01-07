@@ -1,15 +1,15 @@
 package oncall.model
 
+import oncall.Util
+
 data class Day(
     val month: Int,
     val day: Int,
     val dayOfWeek: DayOfWeek,
     var isLegalHoliday: Boolean,
-    val worker: Worker?
+    var worker: Worker?
 ) {
     init {
-        require(month in 1..12)
-        require(day in 1..31)
         isLegalHoliday = LegalHoliday.isLegalHoliday(month, day)
     }
 

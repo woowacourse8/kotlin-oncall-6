@@ -3,6 +3,7 @@ package oncall.controller
 import oncall.Util
 import oncall.service.Service
 import oncall.view.*
+import kotlin.system.exitProcess
 
 class Controller(
     private val inputView: InputView,
@@ -16,7 +17,16 @@ class Controller(
         }
         val dayList = service.getListOfDay(month, startDayOfWeek)
 
+        // 2. 비상 근무 순번 입력받기
+        val (weekdayWorkers, holidayWorkers) = Util.retryUntilValid {
+            val weekdayWorkers = inputView.readWeekdayWorkers()
+            val holidayWorkers = inputView.readHolidayWorkers()
+            Pair(weekdayWorkers, holidayWorkers)
+        }
+
+        val schedule = service.putWorkerNameInDayList(dayList, weekdayWorkers, holidayWorkers)
+
         // 근무표 출력하기
-        outputView.printSchedule(dayList)
+        outputView.printSchedule(schedule)
     }
 }

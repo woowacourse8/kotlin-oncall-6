@@ -3,9 +3,9 @@ package oncall.service
 import oncall.Util
 import oncall.model.Day
 import oncall.model.DayOfWeek
+import oncall.model.Worker
 
 class Service {
-    // 월과 시작 요일을 입력하면 List<Day> 를 반환한다.
     fun getListOfDay(month: Int, startDayOfWeek: DayOfWeek): List<Day> {
         val totalDays = getLastDayOfMonth(month)
         val dayList = mutableListOf<Day>()
@@ -15,6 +15,23 @@ class Service {
             dayList.add(Day(month, i, dayOfWeekList[i - 1], false, null))
         }
         return dayList
+    }
+
+    fun putWorkerNameInDayList(dayList: List<Day>, weekdayWorkers: List<Worker>, holidayWorkers: List<Worker>): List<Day> {
+        var weekdayIndex = 0
+        var holidayIndex = 0
+        return dayList.map { day ->
+            if (day.dayOfWeek.isWeekDay && !day.isLegalHoliday) {
+                day.worker = weekdayWorkers[weekdayIndex++]
+            }
+            if (weekdayIndex == weekdayWorkers.lastIndex) weekdayIndex = 0
+
+            if (!day.dayOfWeek.isWeekDay || day.isLegalHoliday) {
+                day.worker = holidayWorkers[holidayIndex++]
+            }
+            if (holidayIndex == holidayWorkers.lastIndex) holidayIndex = 0
+            day
+        }
     }
 
     private fun getLastDayOfMonth(month: Int): Int {
