@@ -18,7 +18,7 @@ data class Day(
     private enum class LegalHoliday(val month: Int, val day: Int) {
         NEW_YEARS_DAY(1, 1),
         MARCH_FIRST(3, 1),
-        CHILDRENS_DAY(5, 5),
+        CHILDREN_DAY(5, 5),
         MEMORIAL_DAY(6, 6),
         NATIONAL_LIBERATION_DAY(8, 15),
         FOUNDATION_DAY(10, 3),

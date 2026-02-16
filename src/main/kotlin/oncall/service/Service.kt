@@ -42,7 +42,6 @@ class Service {
         previousWorker: Worker?
     ): Worker {
         val currentQueue = if (day.isHoliday()) holidayQueue else weekdayQueue
-
         var candidate = currentQueue.poll()
 
         if (candidate == previousWorker) {
@@ -52,8 +51,7 @@ class Service {
         }
 
         currentQueue.addLast(candidate)
-        return candidate!!
-
+        return candidate
     }
 
     private fun getLastDayOfMonth(month: Int): Int {
