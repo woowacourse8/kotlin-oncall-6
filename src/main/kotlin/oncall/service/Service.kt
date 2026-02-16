@@ -1,14 +1,14 @@
 package oncall.service
 
-import oncall.Util
 import oncall.model.Day
 import oncall.model.DayOfWeek
 import oncall.model.Worker
+import java.time.YearMonth
 import java.util.LinkedList
 
 class Service {
     fun getListOfDay(month: Int, startDayOfWeek: DayOfWeek): List<Day> {
-        val totalDays = getLastDayOfMonth(month)
+        val totalDays = YearMonth.of(2024, month).lengthOfMonth()
         val dayList = mutableListOf<Day>()
         val dayOfWeekList = DayOfWeek.getListOfDaysSize(totalDays, startDayOfWeek)
 
@@ -52,14 +52,5 @@ class Service {
 
         currentQueue.addLast(candidate)
         return candidate
-    }
-
-    private fun getLastDayOfMonth(month: Int): Int {
-        return when (month) {
-            2 -> 28
-            4, 6, 9, 11 -> 30
-            1, 3, 5, 7, 8, 10, 12 -> 31
-            else -> throw IllegalArgumentException(Util.ERROR_MESSAGE)
-        }
     }
 }
