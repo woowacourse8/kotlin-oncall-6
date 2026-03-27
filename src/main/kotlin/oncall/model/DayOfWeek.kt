@@ -21,7 +21,7 @@ enum class DayOfWeek(val label: String, val isWeekDay: Boolean) {
         fun getListOfDaysSize(totalDays: Int, startDayOfWeek: DayOfWeek): List<DayOfWeek> {
             val startIndex = entries.find {
                 it == startDayOfWeek
-            }!!.ordinal
+            }?.ordinal ?: throw IllegalArgumentException("[ERROR] 요일 입력이 잘못 되었습니다.")
             val remainingDayOfWeeks = DayOfWeek.entries.drop(startIndex)
 
             var checkCount = 0
